@@ -22,7 +22,7 @@ public class ObjetoEquipable {
         obtenerMejoraFinal();
     }
     
-    public int generarAleatorio(int min, int max){
+    private int generarAleatorio(int min, int max){
             Random aleatorio = new Random();
             
             int rango = max-min;
@@ -93,7 +93,7 @@ public class ObjetoEquipable {
         System.out.println("El rango del objeto es " + estrellas);
     }
     
-    public int obtenerMejoraFinal(){
+    private int obtenerMejoraFinal(){
         mejoraFinal = mejoraBase*estrellas;
         return mejoraFinal;
     }
