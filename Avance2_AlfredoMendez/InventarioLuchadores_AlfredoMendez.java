@@ -13,7 +13,11 @@ import java.util.Scanner;
  * @author hypoc
  */
 public class InventarioLuchadores {
-    private ArrayList<Luchador> listaLuchadores = new ArrayList<>();
+    private ArrayList<Luchador> listaLuchadores;
+    
+    public InventarioLuchadores(){
+        listaLuchadores = new ArrayList<>();   
+    }
     
     private String pedirDato(){                         //Almacena el dato que se ingreso
         Scanner teclado = new Scanner(System.in);
