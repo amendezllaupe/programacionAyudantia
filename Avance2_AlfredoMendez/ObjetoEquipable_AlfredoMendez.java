@@ -60,6 +60,35 @@ public class ObjetoEquipable {
             return estrella;
         }
     
+    public int getEstrellas(){
+        return estrellas;
+    }
+    
+    private int elegirCaracteristica(){
+        return generarAleatorio(0,3);
+    }
+    
+    public void mejorarCaracteristica(int opcion, Luchador luchador){
+        switch(opcion){
+            case 0:
+                luchador.setHp(luchador.getHp() * this.mejoraFinal);
+                System.out.println("Se ha mejorado HP");
+                break;
+            case 1:
+                luchador.setAtk(luchador.getAtk() * this.mejoraFinal);
+                System.out.println("Se ha mejorado ATK");
+                break;
+            case 2:
+                luchador.setDef(luchador.getDef() * this.mejoraFinal);
+                System.out.println("Se ha mejorado DEF");
+                break;
+            case 3:
+                luchador.setSpd(luchador.getSpd() * this.mejoraFinal);
+                System.out.println("Se ha mejorado SPD");
+                break;
+        }
+    }
+    
     public void mostrarEstrella(){
         System.out.println("El rango del objeto es " + estrellas);
     }
