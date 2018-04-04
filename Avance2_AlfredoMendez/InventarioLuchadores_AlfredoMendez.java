@@ -98,7 +98,7 @@ public class InventarioLuchadores {
                 break;
             case "6":
                 ArrayList<Luchador> listaFiltrada2 = generarListaFiltrada(); //* (No se me ocurrió otra solución)
-                System.out.println("Ingrese la facción que desea filtrar");
+                System.out.println("Ingrese el rango que desea filtrar");
                 filtrarRango(listaFiltrada2 , verificarEntero());
                 System.out.println("LISTA FILTRADA POR RANGO");
                 System.out.println("--------------------------");
