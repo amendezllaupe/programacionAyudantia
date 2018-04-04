@@ -17,8 +17,6 @@ public class Luchador {
     private int spd;
     private int rango;
     private String faccion;
-    private ObjetoEquipable objeto;
-    private int valorObjeto;
     
         public Luchador(String nombre, int hp, int atk, int def, int spd, int rango, String faccion){
             this.nombre = nombre;
@@ -32,19 +30,12 @@ public class Luchador {
     
         public Luchador(){
             this.rango = determinarEstrella();
-            this.valorObjeto = determinarObjeto();
             this.nombre = elegirLista(listaNombre());
-            this.hp = generarAleatorio(200,500) * rango * valorObjeto;
-            this.atk = generarAleatorio(20,70) * rango * valorObjeto;
-            this.def = generarAleatorio(5,25) * rango * valorObjeto;
-            this.spd = generarAleatorio(10,100) * rango * valorObjeto;
+            this.hp = generarAleatorio(200,500) * rango;
+            this.atk = generarAleatorio(20,70) * rango;
+            this.def = generarAleatorio(5,25) * rango;
+            this.spd = generarAleatorio(10,100) * rango;
             this.faccion = elegirLista(listaFaccion());        
-        }
-        
-        public int determinarObjeto(){
-            objeto = new ObjetoEquipable();
-            int valor = objeto.obtenerMejoraFinal();
-            return valor;
         }
         
         public int generarAleatorio(int min, int max){
@@ -119,7 +110,23 @@ public class Luchador {
         public String getFaccion(){
             return faccion;
         }
-        
+
+        public void setHp(int hp) {
+            this.hp = hp;
+        }
+
+        public void setAtk(int atk) {
+            this.atk = atk;
+        }
+
+        public void setDef(int def) {
+            this.def = def;
+        }
+
+        public void setSpd(int spd) {
+            this.spd = spd;
+        }
+            
         public void mostrarTodo(){
             System.out.println("Nombre: "+ this.nombre + "\n" +
                     "HP: " + this.hp + "\n" +
