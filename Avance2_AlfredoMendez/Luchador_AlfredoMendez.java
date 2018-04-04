@@ -38,7 +38,7 @@ public class Luchador {
             this.faccion = elegirLista(listaFaccion());        
         }
         
-        public int generarAleatorio(int min, int max){
+        private int generarAleatorio(int min, int max){
             Random aleatorio = new Random();
             
             int rango = max-min;
@@ -47,24 +47,24 @@ public class Luchador {
             return azar;
         }
         
-        public String[] listaNombre(){
+        private String[] listaNombre(){
             String[] lista = {"Tonyo Ers","Pfeifer","Lautaro","Escorpión","Gabri-El","Onyot","Oratual","Lobezno","Manu-el","Lebrecht","Tcherbel","Zap","Barrabas","Yisus","Messi"};
             return lista;
         }
         
-        public String[] listaFaccion(){
+        private String[] listaFaccion(){
             String[] lista = {"Fuego","Agua","Tierra"};
             return lista;
         }
         
-        public String elegirLista(String[] matriz){
+        private String elegirLista(String[] matriz){
             int posicion = generarAleatorio(0,matriz.length-1);
             String datoMostrar = matriz[posicion];
         
             return datoMostrar;
         }
         
-        public int determinarEstrella(){
+        private int determinarEstrella(){
             int estrella = 0;
             int porciento = generarAleatorio(1,100);
             
