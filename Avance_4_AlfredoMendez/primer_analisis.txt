@@ -1,0 +1,9 @@
+1) Entre la clase InventarioLuchadores y la clase Luchador existe una relación de asociación, ya que InventarioLuchadores necesita conocer 
+la existencia de la otra clase. La relación de multiplicidad observada entre estas 2 clases es: Luchador(1..25) e InventarioLuchador(1).
+
+2) Entre la clase InventarioObjetos y la clase ObjetoEquipable existe una relación de asociación, ya que al igual que en el caso 
+anterior, la clase InventarioObjetos necesita conocer la existencia de la otra clase. La relación de multiplicidad observada entre 
+estas 2 clases es: ObjetoEquipable(0..10) e InventarioObjetos(1).
+
+3) Entre la clase Monstruo y la clase ObjetoEquipable existe una relación de dependencia, ya que Monstruo crea una instancia de la clase
+ObjetoEquipable que solo usa una vez, luego de esto la borra.
