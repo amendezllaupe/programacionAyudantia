@@ -1,0 +1,17 @@
+1) Entre la clase InventarioLuchadores y la clase Luchador existe una relación de agregación, ya que InventarioLuchadores se compone 
+de "Luchadores", pero un luchador puede existir sin estar en un inventario. La relación de multiplicidad observada entre estas 2 clases 
+es: Luchador(1..25) e InventarioLuchador(1).
+
+2) Entre la clase InventarioObjetos y la clase ObjetoEquipable existe una relación de agregación, ya que al igual que en el caso 
+anterior, la clase InventarioObjetos se compone de "Objetos Equipables". La relación de multiplicidad observada entre 
+estas 2 clases es: ObjetoEquipable(0..10) e InventarioObjetos(1).
+
+3) Tanto la clase Monstruo con Luchador tienen una relación de asociación con la clase ObjetoEquipable, su multiplicidad es de 1 ObjetoEquipable.
+En el caso de Luchador se equipa 1 objeto y el monstruo dropea 1 objeto.
+
+4) Entre la clase Monstruo e InventarioObjetos existe una relación de asociación, la clase Monstruo posee un "inventario de objetos" con 3 objetos
+dentro de este inventario, por lo tanto la multiplicidad es de 1 InventarioObjeto.
+
+5) Tanto la clase Monstruo, InvetarioLuchadores y Dado tienen una relación de asociación con la clase Batalla. Multiplicidad: La clase Batalla posee 1 
+"inventario de objetos", 1 "monstruo" y 2 "dados. La navegavilidad va desde Batalla a las otras clases ya que esta conoce la existencia de las demás, 
+pero no viceversa.
