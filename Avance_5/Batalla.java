@@ -19,6 +19,7 @@ public class Batalla {
     
     public Batalla(){
         this.peleadores = new InventarioLuchadores();
+        generarEscuadron();
         this.monstruo = new Monstruo();
         this.restaDados = obtenerResta();
         pelear();
@@ -50,27 +51,81 @@ public class Batalla {
     }
     
     public void pelear(){
+        System.out.println("================================================");
         InventarioLuchadores luchadoresOrdenados = ordenarLuchadores();
+        int turno = 0;
+        int auxLargo = 6;
+        
+        System.out.println("HP MONSTRUO: " + monstruo.getHp() + "");
+                
+        for(int j = 0; j < peleadores.getListaLuchadores().size();j++){
+            System.out.println("HP " + peleadores.getListaLuchadores().get(j).getNombre() + ": " + peleadores.getListaLuchadores().get(j).getHp());
+        }
+        System.out.println("================================================");
         do{
-            for(int i = 0; i < luchadoresOrdenados.getListaLuchadores().size();i++){
-                if(luchadoresOrdenados.getListaLuchadores().get(i).getHp() <= 0){
-                    luchadoresOrdenados.getListaLuchadores().remove(i);
-                }
+            turno++;
+            System.out.println("TURNO " + turno);
+            System.out.println("================================================");
+            boolean golpeMonstruo = false;
+            for(int i = 0; i < peleadores.getListaLuchadores().size();i++){
+                
                 compararFaccion(i,luchadoresOrdenados);
                 calcularDaño(i,luchadoresOrdenados);
-                if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() > monstruo.getSpd()){
+                if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() > monstruo.getSpd() || golpeMonstruo){
                     monstruo.setHp(monstruo.getHp() - this.danoPeleador);
-                } else if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() < monstruo.getSpd()){
-                    luchadoresOrdenados.getListaLuchadores().get(i).setHp(luchadoresOrdenados.getListaLuchadores().get(i).getHp() - this.danoMonstruo);
+                    System.out.println(peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado");
+                    
+                    if(this.monstruo.getHp() <= 0 ){
+                        break;
+                    }
+                    
+                } else if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() < monstruo.getSpd() && !golpeMonstruo || !golpeMonstruo){
+                    peleadores.getListaLuchadores().get(0).setHp(peleadores.getListaLuchadores().get(0).getHp() - this.danoMonstruo);
+                    System.out.println("¡Que golpe ha dado el monstruo!");
+                    golpeMonstruo = true;
+                    
+                    if(peleadores.getListaLuchadores().get(0).getHp() <= 0){
+                        System.out.println("\n*Ha muerto: " + peleadores.getListaLuchadores().get(0).getNombre() + "*\n");
+                        peleadores.getListaLuchadores().remove(0);
+                        if (luchadoresOrdenados.getListaLuchadores().size() <= 0){
+                            break;
+                        }
+                    }
+                    
+                    monstruo.setHp(monstruo.getHp() - this.danoPeleador);
+                    
+                    if(auxLargo > peleadores.getListaLuchadores().size() && auxLargo > 0){
+                        auxLargo--;
+                        System.out.println(peleadores.getListaLuchadores().get(i-1).getNombre() + ": ha atacado");
+                    } else {
+                        System.out.println(peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado");
+                    }
+                    
+                    if(this.monstruo.getHp() <= 0 ){
+                        break;
+                    }
+                    
                 }
+                
             }
-        }while(this.monstruo.getHp() > 0 || luchadoresOrdenados.getListaLuchadores().size() > 0);
-        
-        if(this.monstruo.getHp() <= 0 ){
-            System.out.println("Tu Equipo ha ganado");
-        } else if (luchadoresOrdenados.getListaLuchadores().size() <= 0){
-            System.out.println("Ha ganado el monstruo");
-        }
+            System.out.println("================================================");
+            System.out.println("HP MONSTRUO: " + monstruo.getHp() + "");
+                
+            for(int j = 0; j < peleadores.getListaLuchadores().size();j++){
+                System.out.println("HP " + peleadores.getListaLuchadores().get(j).getNombre() + ": " + peleadores.getListaLuchadores().get(j).getHp());
+            }
+            System.out.println("================================================");
+            
+            if(this.monstruo.getHp() <= 0 ){
+                System.out.println("Ha muerto el monstruo");
+                System.out.println("Tu Equipo ha ganado");
+                break;
+            } else if (luchadoresOrdenados.getListaLuchadores().size() <= 0){
+                System.out.println("Ha ganado el monstruo");
+                break;
+            }
+            
+        }while(this.monstruo.getHp() > 0 || peleadores.getListaLuchadores().size() > 0);
         
     }
     
