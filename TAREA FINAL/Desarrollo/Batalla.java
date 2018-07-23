@@ -16,6 +16,7 @@ public class Batalla {
     private InventarioLuchadores peleadores;
     private Monstruo monstruo;
     private int restaDados;
+    private String resultados;
     
     public Batalla(){
         this.peleadores = new InventarioLuchadores();
@@ -23,6 +24,12 @@ public class Batalla {
         this.restaDados = obtenerResta();
     }
     
+    public void generarEscuadron(int numLuchadores){
+        for(int i = 0 ; i < numLuchadores ; i++){
+            peleadores.agregarLuchador();
+        }
+    }
+
     public InventarioLuchadores getPeleadores() {
         return peleadores;
     }
@@ -30,12 +37,15 @@ public class Batalla {
     public void setPeleadores(InventarioLuchadores peleadores) {
         this.peleadores = peleadores;
     }
-    
-    public void generarEscuadron(int numLuchadores){
-        for(int i = 0 ; i < numLuchadores ; i++){
-            peleadores.agregarLuchador();
-        }
+
+    public String getResultados() {
+        return resultados;
     }
+
+    public void setResultados(String resultados) {
+        this.resultados = resultados;
+    }
+    
     
     public InventarioLuchadores ordenarLuchadores(){
         InventarioLuchadores luchadoresOrdenados;
@@ -62,12 +72,12 @@ public class Batalla {
         int auxLargo = numLuchadores;
         int contador = 0;
         
-        mostrarHPTodos();
+        resultados+=mostrarHPTodos();
         
         do{
             turno++;
-            System.out.println("TURNO " + turno);
-            System.out.println("================================================");
+            resultados+="TURNO " + turno + "\n" +
+            "================================================"+"\n";
             boolean golpeMonstruo = false;
             for(int i = 0; i < peleadores.getListaLuchadores().size();i++){
                 
@@ -76,7 +86,7 @@ public class Batalla {
                 
                 //LOS LUCHADORES ATACAN
                 if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() > monstruo.getSpd() && peleadores.getListaLuchadores().get(i).getHp() > 0|| golpeMonstruo){
-                    System.out.println(peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado");
+                    resultados+=peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado"+"\n";
                     monstruoDañado();
                     
                     contador++;
@@ -86,7 +96,7 @@ public class Batalla {
                     
                 //EL MONSTRUO ATACA
                 } else if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() < monstruo.getSpd() && !golpeMonstruo){
-                    System.out.println("¡Que golpe ha dado el monstruo!");
+                    resultados+="¡Que golpe ha dado el monstruo!"+"\n";
                     luchadorDañado(i);
                     
                     golpeMonstruo = true;
@@ -102,9 +112,9 @@ public class Batalla {
                     //CONTRAATACA EL LUCHADOR
                     if(auxLargo > peleadores.getListaLuchadores().size() && (i-1>=0)){
                         auxLargo--;
-                        System.out.println(peleadores.getListaLuchadores().get(i-1).getNombre() + ": ha atacado");
+                        resultados+=peleadores.getListaLuchadores().get(i-1).getNombre() + ": ha atacado"+"\n";
                     } else {
-                        System.out.println(peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado");
+                        resultados+=peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado"+"\n";
                     }
                     
                     monstruoDañado();
@@ -117,28 +127,28 @@ public class Batalla {
                 
             }
             
-            mostrarHPTodos();
+            resultados+=mostrarHPTodos();
             
             //EL MONSTRUO RECIBE 6 GOLPES SEGUIDOS Y ATACA EN AREA
             if(!golpeMonstruo || contador == 6){
-                System.out.println("¡El monstruo se ha enfurecido!");
+                resultados+="¡El monstruo se ha enfurecido!"+"\n";
                 for(int i = 0; i < peleadores.getListaLuchadores().size(); i++){
                     luchadorDañado(i);
                 }
                 
-                System.out.println("¡Que golpe ha dado el monstruo!");
+                resultados+="¡Que golpe ha dado el monstruo!"+"\n";
                 golpeMonstruo = true;
                 
-                mostrarHPTodos();
+                resultados+=mostrarHPTodos();
             }
             
             if(this.monstruo.getHp() <= 0 ){
-                System.out.println("Ha muerto el monstruo");
-                System.out.println("Tu Equipo ha ganado");
-                System.out.println("El monstruo ha dropeado un: \n" + monstruo.obtenerDrop());
+                resultados+="Ha muerto el monstruo"+"\n"+
+                "Tu Equipo ha ganado"+"\n"+
+                "El monstruo ha dropeado un: \n" + monstruo.obtenerDrop()+"\n";
                 break;
             } else if (comprobarHPLuchadores(numLuchadores)){
-                System.out.println("Ha ganado el monstruo");
+                resultados+="Ha ganado el monstruo"+"\n";
                 break;
             }
             
