@@ -71,7 +71,7 @@ public class Ingreso extends JFrame implements ActionListener{
     private int verificarNumero(String text){
         int num = 0;
         //Si el texto ingresado no es un número entero se gatilla la excepción
-        //
+        //Cubre un error de capa 8 (en caso de que el usuario no ingrese un número) evitando que el programa genere un error.
         //Se utiliza para casos en los que se introducen caracteres no numericos
         try{
             num = Integer.parseInt(text);
