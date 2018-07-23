@@ -72,7 +72,7 @@ public class Batalla {
         int auxLargo = numLuchadores;
         int contador = 0;
         
-        resultados+=mostrarHPTodos()+"\n";
+        resultados=mostrarHPTodos()+"\n";
         
         do{
             turno++;
@@ -84,6 +84,8 @@ public class Batalla {
                 compararFaccion(i,luchadoresOrdenados);
                 calcularDaño(i,luchadoresOrdenados);
                 
+                
+                
                 //LOS LUCHADORES ATACAN
                 if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() > monstruo.getSpd() && peleadores.getListaLuchadores().get(i).getHp() > 0|| golpeMonstruo){
                     resultados+=peleadores.getListaLuchadores().get(i).getNombre() + ": ha atacado"+"\n";
@@ -93,6 +95,7 @@ public class Batalla {
                     if(this.monstruo.getHp() <= 0 ){
                         break;
                     }
+                    
                     
                 //EL MONSTRUO ATACA
                 } else if(luchadoresOrdenados.getListaLuchadores().get(i).getSpd() < monstruo.getSpd() && !golpeMonstruo){
@@ -222,6 +225,9 @@ public class Batalla {
             this.danoPeleador = (inventario.getListaLuchadores().get(posicion).getAtk() - monstruo.getDef());
             this.danoMonstruo = (monstruo.getAtk() - peleadores.getListaLuchadores().get(posicion).getDef());
         }
+        
+        System.out.println(danoPeleador);
+        System.out.println(danoMonstruo);
     }
     
     public void compararFaccion(int posicion , InventarioLuchadores inventario){
