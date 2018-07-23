@@ -13,6 +13,7 @@ import javax.swing.*;
 public class Ingreso extends JFrame implements ActionListener{
     
     private Batalla batalla;
+    private Observacion observacion;
     private JButton generarEscuadroButton;
     private JTextField numeroLuchadoresTF;
     private JLabel instruccionLabel;
@@ -35,7 +36,7 @@ public class Ingreso extends JFrame implements ActionListener{
     }
     
     private void initComponents(){
-        this.generarEscuadroButton = new JButton("GENERAR ESCUADRON");
+        this.generarEscuadroButton = new JButton("PELEAR");
         
         this.numeroLuchadoresTF = new JTextField();
         
@@ -95,6 +96,9 @@ public class Ingreso extends JFrame implements ActionListener{
             this.batalla.getPeleadores().getListaLuchadores().clear();
             this.batalla.generarEscuadron(verificarNumero(this.numeroLuchadoresTF.getText()));
             this.statsLuchadoresTA.setText(batalla.mostrarHPTodos());
+            this.batalla.pelear(verificarNumero(this.numeroLuchadoresTF.getText()));
+            this.observacion = new Observacion("OBSERVACION",batalla);
+            observacion.setVisible(true);
         }
     }
 }
