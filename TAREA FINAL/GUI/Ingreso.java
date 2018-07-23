@@ -29,6 +29,8 @@ public class Ingreso extends JFrame implements ActionListener{
         
         addWindow();
         
+        this.statsLuchadoresTA.setEditable(false);
+        
         this.generarEscuadroButton.addActionListener(this);
     }
     
@@ -90,9 +92,9 @@ public class Ingreso extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.generarEscuadroButton){
+            this.batalla.getPeleadores().getListaLuchadores().clear();
             this.batalla.generarEscuadron(verificarNumero(this.numeroLuchadoresTF.getText()));
             this.statsLuchadoresTA.setText(batalla.mostrarHPTodos());
-            this.batalla.pelear(verificarNumero(this.numeroLuchadoresTF.getText()));
         }
     }
 }
