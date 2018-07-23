@@ -18,6 +18,7 @@ public class Ingreso extends JFrame implements ActionListener{
     private JTextField numeroLuchadoresTF;
     private JLabel instruccionLabel;
     private JTextArea statsLuchadoresTA;
+    private JLabel mensajeError;
             
     public Ingreso(String title){
         super(title);
@@ -41,10 +42,11 @@ public class Ingreso extends JFrame implements ActionListener{
         this.numeroLuchadoresTF = new JTextField();
         
         this.instruccionLabel = new JLabel("Ingresa el número de Luchadores a Pelear (1 a 6)");
+        this.mensajeError = new JLabel("");
         
         this.statsLuchadoresTA = new JTextArea("");
         
-        this.batalla = new Batalla();
+       // this.batalla = new Batalla();
         
     }
     
@@ -57,6 +59,7 @@ public class Ingreso extends JFrame implements ActionListener{
         this.generarEscuadroButton.setBounds(75, 100, 150, 30);
         
         this.instruccionLabel.setBounds(25, 25, 300, 30);
+        this.mensajeError.setBounds(75, 75, 150, 30);
         
         this.numeroLuchadoresTF.setBounds(150,50,20,20);
         
@@ -68,10 +71,12 @@ public class Ingreso extends JFrame implements ActionListener{
         this.add(this.numeroLuchadoresTF);
         this.add(this.instruccionLabel);
         this.add(this.statsLuchadoresTA);
+        this.add(this.mensajeError);
         this.add(new JLabel());
     }
     
-    private int verificarNumero(String text){
+    private boolean verificarNumero(String text){
+        boolean esNumero = true;
         int num = 0;
         //Si el texto ingresado no es un número entero se gatilla la excepción
         //Cubre un error de capa 8 (en caso de que el usuario no ingrese un número) evitando que el programa genere un error.
@@ -79,26 +84,31 @@ public class Ingreso extends JFrame implements ActionListener{
         try{
             num = Integer.parseInt(text);
             if (num>6 || num<1){
-                System.out.println("La cantida de Luchadores no es válida");
-                System.exit(0);
+                esNumero = false;
+                this.numeroLuchadoresTF.setText("0");
+                this.mensajeError.setText("Está fuera del rango");
             }
         }catch(NumberFormatException e){
-            System.out.println("Sorry, it isn't a number");
-            System.exit(0);
+            esNumero = false;
+            this.mensajeError.setText("Sorry, it isn't a number");
         }
         
-        return num;
+        return esNumero;
     }
     
     @Override
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == this.generarEscuadroButton){
-            this.batalla.getPeleadores().getListaLuchadores().clear();
-            this.batalla.generarEscuadron(verificarNumero(this.numeroLuchadoresTF.getText()));
-            this.statsLuchadoresTA.setText(batalla.mostrarHPTodos());
-            this.batalla.pelear(verificarNumero(this.numeroLuchadoresTF.getText()));
-            this.observacion = new Observacion("OBSERVACION",batalla);
-            observacion.setVisible(true);
+            if(verificarNumero(this.numeroLuchadoresTF.getText())){
+                this.batalla = new Batalla();
+                //this.batalla.getPeleadores().getListaLuchadores().clear();
+                this.batalla.generarEscuadron(Integer.parseInt(this.numeroLuchadoresTF.getText()));
+                this.statsLuchadoresTA.setText(batalla.mostrarHPTodos());
+                this.batalla.pelear(Integer.parseInt(this.numeroLuchadoresTF.getText()));
+                this.observacion = new Observacion("OBSERVACION",batalla);
+                this.batalla.setResultados("");
+                observacion.setVisible(true);
+            }
         }
     }
 }
