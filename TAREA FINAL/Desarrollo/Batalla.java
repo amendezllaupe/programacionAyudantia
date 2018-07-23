@@ -23,6 +23,14 @@ public class Batalla {
         this.restaDados = obtenerResta();
     }
     
+    public InventarioLuchadores getPeleadores() {
+        return peleadores;
+    }
+
+    public void setPeleadores(InventarioLuchadores peleadores) {
+        this.peleadores = peleadores;
+    }
+    
     public void generarEscuadron(int numLuchadores){
         for(int i = 0 ; i < numLuchadores ; i++){
             peleadores.agregarLuchador();
