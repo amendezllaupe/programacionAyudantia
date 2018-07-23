@@ -72,11 +72,11 @@ public class Batalla {
         int auxLargo = numLuchadores;
         int contador = 0;
         
-        resultados+=mostrarHPTodos();
+        resultados+=mostrarHPTodos()+"\n";
         
         do{
             turno++;
-            resultados+="TURNO " + turno + "\n" +
+            resultados+="\n"+"TURNO " + turno + "\n" +
             "================================================"+"\n";
             boolean golpeMonstruo = false;
             for(int i = 0; i < peleadores.getListaLuchadores().size();i++){
@@ -158,15 +158,13 @@ public class Batalla {
     
     public String mostrarHPTodos(){
         String texto = "";
-        texto+="================================================";
-        texto+="\n";
-        texto+="HP MONSTRUO: " + monstruo.getHp() + "\n";
-        texto+="\n";
+        texto+="================================================"+"\n"+
+        "HP MONSTRUO: " + monstruo.getHp() + "\n"+"\n";
 
         for(int j = 0; j < peleadores.getListaLuchadores().size();j++){
             texto+= "HP " + peleadores.getListaLuchadores().get(j).getNombre() + ": " + peleadores.getListaLuchadores().get(j).getHp() + "\n";
         }
-        texto+= "================================================";
+        texto+= "================================================"+"\n";
         
         return texto;
     }
