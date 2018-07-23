@@ -92,6 +92,7 @@ public class Ingreso extends JFrame implements ActionListener{
         if(ae.getSource() == this.generarEscuadroButton){
             this.batalla.generarEscuadron(verificarNumero(this.numeroLuchadoresTF.getText()));
             this.statsLuchadoresTA.setText(batalla.mostrarHPTodos());
+            this.batalla.pelear(verificarNumero(this.numeroLuchadoresTF.getText()));
         }
     }
 }
